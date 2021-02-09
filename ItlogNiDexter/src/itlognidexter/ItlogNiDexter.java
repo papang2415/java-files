@@ -2,25 +2,9 @@ package itlognidexter;
 
 import java.util.Scanner;
 
-class Order {
 
-    String customerName;
-    double amount;
-    double total;
-    EggVariant[] variants;
 
-    Order() {
-        this.variants = new EggVariant[5];
-    }
 
-}
-
-class EggVariant {
-
-    String variant;
-    int qty;
-    double price;
-}
 
 public class ItlogNiDexter {
 
@@ -28,18 +12,57 @@ public class ItlogNiDexter {
 
         Scanner input = new Scanner(System.in);
 
-        String[] variants = {"Penoy", "Balot#16", "Balot#18"};
-
-        Order orders[] = new Order[10];
-
-        Order order = new Order();
-
-        order.customerName = "Loerm";
-
-        orders[0] = order;
-
-        System.out.println("Order 1 : Customer Name : " + orders[0].customerName);
+        String inventory = "";
+        int total =0;
+        
+        String order;
+        
+        
+        System.out.println("Enter customer name");
+        String name = input.nextLine();
+        System.out.println("Enter customer variant");
+        String variant = input.nextLine();
+        System.out.println("Enter customer quantity");
+        int qty = input.nextInt();
+        
+        int subTotal = ItlogNiDexter.getSubTotal(variant, qty);
+        
+        order = "Customer name : " + name + "\n" +
+                "Variant : " + variant + "\n" +
+                 "Qty : " + qty + "\n" +
+                "SubTotal : " + subTotal + "\n";
+        
+        
+        
+        
+        System.out.println(order);
+        inventory += order;
+        
+        System.out.println("Inventory \n" + inventory);
+        
+        
+        
 
     }
+    
+    public static int getSubTotal(String variant,int qty){
+        int subTotal = 0;
+        switch(variant){
+            case "penoy":
+                subTotal = qty * 12;
+                break;
+            case "balot#16":
+                subTotal = qty * 15;
+                break;
+            case "balot#118":
+                subTotal = qty * 16;
+                break;    
+                
+        }
+ 
+        return  subTotal;
+    }
+    
+    
 
 }
