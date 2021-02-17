@@ -1,11 +1,13 @@
 package bitaybata;
 
+
 public class test {
 
-    public String[] names = {"Joshua", "Ryan", "Kaith", "Jeselle"};
+    public String[] names = {"joshua", "james", "kaith", "jeselle"};
     public String[] hint = {"Shy Guy", "Gwapo", "Cute", "Bright"};
-    
+    int len = hint.length;
     public int generateRandom() {
-        return 0;
+        return len;
     }
 }
+

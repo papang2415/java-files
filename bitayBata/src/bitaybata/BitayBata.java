@@ -1,44 +1,82 @@
 package bitaybata;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class BitayBata {
 
+    String[] hide;
+
     public static void main(String[] args) {
         char temp;
-        String[] bata = {"(_)", "_|_", " |", "/ \\"};
-
-        test a = new test();
-        int guess = a.generateRandom();
-        String name = a.names[guess];
+        String[] bata = {"|        (_)", "|        _|_", "|         | ", "|        / \\"};
         int len = bata.length;
         Scanner in = new Scanner(System.in);
-        String hide = "";
+        test a = new test();
+
+        Random r = new Random();
+        int ran = r.nextInt(a.names.length);
+        System.out.println("random: " + ran);
+
+        String name = a.names[ran];
+        System.out.println("name: " + name.length());
+        char[] newName = name.toCharArray();
+        char[] hide = name.toCharArray();
+        System.out.println("name: " + name);
+
         for (int i = 0; i < name.length(); i++) {
-            hide += " - ";
+            hide[i] = '-';
+            System.out.print(hide[i]);
         }
+        System.out.println("\nHint: " + a.hint[ran]);
 
-        /* for (int i = 0; i < name.length(); i++) {
-            System.out.print(" _ ");
-        }*/
-        System.out.println("\n" + a.names[guess]);
-        System.out.println("Hint: " + a.hint[guess]);
-
-        do {
+        for (int i = 1; i <= len; i++) {
             System.out.print("\nEnter Letter: ");
-            temp = in.next().charAt(0);;
-            if (temp == a.names[guess].charAt(0)) {
-                System.out.println(hide);
-                System.out.println("correct");
-                len = len;
-            } else {
-                System.out.println(hide);
-                System.out.println("Wrong");
-                len--;
+            temp = in.nextLine().charAt(0);
+
+            for (int cnt = 0; cnt < newName.length; cnt++) {
+                if (temp == hide[cnt]) {
+                    System.out.println("Already taken");
+                } else {
+                    if (temp == newName[cnt]) {
+                        hide[cnt] = temp;
+                        i--;
+                    }
+                }
+            }
+            System.out.println(hide);
+            switch (i) {
+                case 1:
+                    System.out.println("=============");
+                    System.out.println(bata[0]);
+                    break;
+                case 2:
+                    System.out.println("=============");
+                    System.out.println(bata[0]);
+                    System.out.println(bata[1]);
+                    break;
+                case 3:
+                    System.out.println("=============");
+                    System.out.println(bata[0]);
+                    System.out.println(bata[1]);
+                    System.out.println(bata[2]);
+                    break;
+                case 4:
+                    System.out.println("=============");
+                    System.out.println(bata[0]);
+                    System.out.println(bata[1]);
+                    System.out.println(bata[2]);
+                    System.out.println(bata[3]);
+                    System.out.println("gameover");
+                    break;
             }
 
-        } while (len > 0);
-
+            System.out.printf("\n");
+            if ((new String(name)).equals(new String(hide))) {
+                System.out.println("You Got It!!");
+                continue;
+            }
+        }
     }
 
 }
